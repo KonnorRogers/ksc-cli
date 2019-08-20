@@ -19,5 +19,4 @@ A more linear and less bulky version of my original VpsCli / VpsSetup implementa
 * KSC_PIP2_PACKAGES
 * KSC_PIP3_PACKAGES
 * KSC_SNAP_PACKAGES
-* KSC_ZSH_PLUGINS
 
