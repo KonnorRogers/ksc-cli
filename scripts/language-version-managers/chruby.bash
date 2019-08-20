@@ -1,15 +1,8 @@
 #!/bin/bash
-
-RUBY_VERSION="2.6.2"
+set -e
 
 main(){
-  # installs chruby & ruby-install
   install_chruby_and_ruby-install
-  source "../restart_shell.bash"
-  
-  source /usr/local/share/chruby/chruby.sh
-  source /usr/local/share/chruby/auto.sh
-  chruby ruby-"$RUBY_VERSION"
 }
 
 # this installs ruby & chruby under the .tmp folder within the repo
@@ -38,7 +31,6 @@ install_ruby(){
   tar -xzvf "$RUBY_INSTALL_TAR"
   cd "$RUBY_INSTALL_DIR" || exit 2
   sudo make install
-  ruby-install ruby "$RUBY_VERSION" --no-reinstall
   cd ..
 }
 
