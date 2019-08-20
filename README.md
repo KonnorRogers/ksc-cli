@@ -1,5 +1,21 @@
 A more linear and less bulky version of my original VpsCli / VpsSetup implementations.
 
+## Usage
+
+```bash
+./setup.bash
+# Make sure you export proper variables for the language version managers
+# Ensure $PATH contains "$HOME/bin"
+# export "$PATH:$HOME/bin"
+
+ksc-cli init
+# Creates a $HOME/.kps-cli directory or wherever you specified
+
+ksc-cli cp-config
+ksc-cli install-all
+
+```
+
 ## List of ENV variables
 
 # ~/.ksc/config.bash
