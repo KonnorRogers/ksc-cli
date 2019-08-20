@@ -7,8 +7,13 @@ main(){
 
   # Installs various dependencies
   apt_setup
-  # install_language_version_managers
+  install_language_version_managers
 
+  symlink_ksc_cli_into_bin
+}
+
+symlink_ksc_cli_into_bin(){
+  ln -f -s "./ksc-cli.bash" "$HOME/bin/ksc-cli"
 }
 
 check_if_root(){
