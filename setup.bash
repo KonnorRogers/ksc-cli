@@ -48,6 +48,7 @@ apt_setup(){
   # make gcc ruby ruby-dev golang php'
 
   # Purposely not double quoted to only send one sudo apt install and not error
+  echo "$KSC_APT_ALL"
   sudo apt-get install $KSC_APT_ALL -y
 
   sudo apt-get autoremove -y
@@ -56,13 +57,18 @@ apt_setup(){
 set_ksc_apt_all(){
   if [[ "$KSC_APT_ALL" ]]; then
     echo "\$KSC_APT_ALL env var already set."
-    return
+    echo "1"
   elif [[ -e "$KSC_DIR/packages/apt.bash" ]]; then
     source "$KSC_DIR/packages/apt.bash"
+    echo "2"
   elif [[ -e "$HOME/.ksc/packages/apt.bash" ]]; then
     source "$HOME/.ksc/packages/apt.bash"
-  elif [[ -e "" ]]; then
+    echo "3"
+  elif [[ -e "./default-config/packages/apt.bash" ]]; then
     source "./default-config/packages/apt.bash"
+    echo "4"
+  else
+    echo "5"
   fi
 }
 
