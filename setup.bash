@@ -13,6 +13,10 @@ main(){
 }
 
 symlink_ksc_cli_into_bin(){
+  mkdir -p "$HOME/bin"
+
+  echo "Symlinking ./ksc-cli.bash to $HOME/bin/ksc-cli..."
+
   ln -f -s "./ksc-cli.bash" "$HOME/bin/ksc-cli"
 }
 
@@ -25,7 +29,7 @@ check_if_root(){
 
 # Install nvm, phpenv, chruby etc
 install_language_version_managers(){
-  cd "scripts/language-version-managers" || echo "unable to cd to scripts/language-version-managers" 1>&2 && exit 1
+  cd "scripts/language-version-managers" || (echo "unable to cd to scripts/language-version-managers" 1>&2 && exit 1)
 
   echo "Installing language version managers..."
 
@@ -33,7 +37,7 @@ install_language_version_managers(){
     source "$file"
   done
 
-  cd "../../" || echo "Unable to return to base directory" 1>&2 && exit 1
+  cd "../../" || (echo "Unable to return to base directory" 1>&2 && exit 1)
 }
 
 # Update, upgrade, then install libraries
@@ -42,13 +46,6 @@ apt_setup(){
   sudo apt upgrade -y || sudo apt-get upgrade -y
 
   set_ksc_apt_all
-  # libs='software-properties-common gnupg2 less ufw ack-grep libfuse2
-  # apt-transport-https ca-certificates build-essential bison zlib1g-dev
-  # libyaml-dev libcurl4-openssl-dev libssl-dev libgdbm-dev libreadline-dev libffi-dev fuse
-  # make gcc ruby ruby-dev golang php'
-
-  # Purposely not double quoted to only send one sudo apt install and not error
-  echo "$KSC_APT_ALL"
   sudo apt-get install $KSC_APT_ALL -y
 
   sudo apt-get autoremove -y
@@ -57,18 +54,14 @@ apt_setup(){
 set_ksc_apt_all(){
   if [[ "$KSC_APT_ALL" ]]; then
     echo "\$KSC_APT_ALL env var already set."
-    echo "1"
   elif [[ -e "$KSC_DIR/packages/apt.bash" ]]; then
     source "$KSC_DIR/packages/apt.bash"
-    echo "2"
   elif [[ -e "$HOME/.ksc/packages/apt.bash" ]]; then
     source "$HOME/.ksc/packages/apt.bash"
-    echo "3"
   elif [[ -e "./default-config/packages/apt.bash" ]]; then
     source "./default-config/packages/apt.bash"
-    echo "4"
   else
-    echo "5"
+    echo "Unable to find a source to install packages" 1>&2; exit 1
   fi
 }
 

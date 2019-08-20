@@ -1,11 +1,15 @@
 #!/bin/bash
 set -e
 
-main(){
-  if [[ "$1" == "init" ]]; then
-    source "scripts/set-env.bash"
-    install_all
-  elif [[ "$1" == "install-all" ]];
-  fi
-}
+source "./scripts/set-env.bash"
+COMMANDS="scripts/commands"
+
+arg="$1"
+if [[ "$arg" == "init" ]]; then
+  source "$COMMANDS/init.bash"
+elif [[ "$arg" == "install-all" ]]; then
+  source "$COMMANDS/install-all.bash"
+fi
+
+main
 
