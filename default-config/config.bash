@@ -1,3 +1,4 @@
+export KSC_REPO_PATH="$HOME/ksc-cli"
 export KSC_DIR="$HOME/.ksc"
 export KSC_CONFIG_FILES="$HOME/config-files"
 export KSC_DOTFILES="$HOME/config-files/dotfiles"

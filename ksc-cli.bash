@@ -1,15 +1,12 @@
 #!/bin/bash
 set -e
 
-source "./scripts/set-env.bash"
-COMMANDS="scripts/commands"
+source "$HOME/.ksc-cli/config.bash"
+source "$KSC_REPO_PATH/scripts/set-ksc-dir.bash"
+COMMANDS="$KSC_REPO_PATH/scripts/commands"
 
 arg="$1"
-if [[ "$arg" == "init" ]]; then
-  source "$COMMANDS/init.bash"
-elif [[ "$arg" == "install-all" ]]; then
-  source "$COMMANDS/install-all.bash"
+if [[ "$arg" == "install-all" ]]; then
+  source "$COMMANDS/install.bash"
+  install_all
 fi
-
-main
-

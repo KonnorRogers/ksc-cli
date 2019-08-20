@@ -10,6 +10,13 @@ main(){
   install_language_version_managers
 
   symlink_ksc_cli_into_bin
+  copy_default_config
+}
+
+copy_default_config(){
+  echo "Creating default ksc-cli config directory @ $HOME/.ksc-cli..."
+  mkdir -p "$HOME/.ksc-cli"
+  cp -r ./default-config/* "$HOME/.ksc-cli"
 }
 
 symlink_ksc_cli_into_bin(){
@@ -17,9 +24,9 @@ symlink_ksc_cli_into_bin(){
 
   echo "Symlinking ./ksc-cli/.bash to $HOME/bin/ksc-cli"
   echo "Make sure you run the following in your bashrc or zshrc file:"
-  echo "export PATH=\$PATH:\$HOME/bin/ksc-cli"
+  echo "export PATH=\$PATH:\$HOME/bin"
 
-  ln -f -s "./ksc-cli.bash" "$HOME/bin/ksc-cli"
+  ln -f -s "$(pwd)/ksc-cli.bash" "$HOME/bin/ksc-cli"
 }
 
 check_if_root(){

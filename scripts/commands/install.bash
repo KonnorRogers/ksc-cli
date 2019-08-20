@@ -6,6 +6,7 @@ install_all(){
   install_all_languages
   install_all_additional
 }
+export -f install_all
 
 install_all_packages(){
   install_apt_packages
@@ -26,7 +27,7 @@ export -f install_apt_packages
 
 install_gems_packages(){
   gems="${1:-$KSC_GEMS}"
-  gem install $gems
+  gem install "$gems"
 }
 export -f install_gems_packages
 
