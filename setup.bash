@@ -7,7 +7,7 @@ main(){
 
   # Installs various dependencies
   apt_setup
-  install_language_version_managers
+  # install_language_version_managers
 
 }
 
@@ -36,15 +36,29 @@ apt_setup(){
   sudo apt update || sudo apt-get update
   sudo apt upgrade -y || sudo apt-get upgrade -y
 
-  echo "Installing prequisite libraries..."
+  set_ksc_apt_all
+  # libs='software-properties-common gnupg2 less ufw ack-grep libfuse2
+  # apt-transport-https ca-certificates build-essential bison zlib1g-dev
+  # libyaml-dev libcurl4-openssl-dev libssl-dev libgdbm-dev libreadline-dev libffi-dev fuse
+  # make gcc ruby ruby-dev golang php'
 
-  libs='software-properties-common gnupg2 less ufw ack-grep libfuse2
-  apt-transport-https ca-certificates build-essential bison zlib1g-dev
-  libyaml-dev libcurl4-openssl-dev libssl-dev libgdbm-dev libreadline-dev libffi-dev fuse
-  make gcc ruby ruby-dev golang php'
-  sudo apt-get install $libs -y
+  # Purposely not double quoted to only send one sudo apt install and not error
+  sudo apt-get install $KSC_APT_ALL -y
 
   sudo apt-get autoremove -y
+}
+
+set_ksc_apt_all(){
+  if [[ "$KSC_APT_ALL" ]]; then
+    echo "\$KSC_APT_ALL env var already set."
+    return
+  elif [[ -e "$KSC_DIR/packages/apt.bash" ]]; then
+    source "$KSC_DIR/packages/apt.bash"
+  elif [[ -e "$HOME/.ksc/packages/apt.bash" ]]; then
+    source "$HOME/.ksc/packages/apt.bash"
+  elif [[ -e "" ]]; then
+    source "./default-config/packages/apt.bash"
+  fi
 }
 
 main
