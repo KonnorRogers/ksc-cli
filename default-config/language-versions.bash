@@ -1,6 +1,6 @@
-KSC_PHP_VERSION="7.3.8"
-KSC_RUBY_VERSION="2.6.2"
-KSC_NODE_VERSION="11.15.0"
+export KSC_PHP_VERSION="7.3.8"
+export KSC_RUBY_VERSION="2.6.2"
+export KSC_NODE_VERSION="11.15.0"
 
 main(){
   install_php
@@ -30,4 +30,4 @@ install_node(){
   nvm use "$KSC_NODE_VERSION"
 }
 
-
+main
